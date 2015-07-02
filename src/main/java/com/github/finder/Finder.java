@@ -103,10 +103,10 @@ public class Finder {
                     }
                 }
             }
-	catch (IOException e) {
-		return false;
-	}
-	}
+			catch (IOException e) {
+				return false;
+			}
+		}	
 
         return false;
     }
