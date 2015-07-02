@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class Finder {
     private Args args;
@@ -103,8 +104,10 @@ public class Finder {
                 }
             }
 	catch (IOException e) {
-		throw new RuntimeException(e.toString());
+		return false;
 	}
+	}
+
         return false;
     }
 }
