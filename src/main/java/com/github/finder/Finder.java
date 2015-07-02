@@ -3,6 +3,9 @@ package com.github.finder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Finder {
     private Args args;
@@ -33,6 +36,9 @@ public class Finder {
         }
         if(args.getSize() != null){
             flag &= checkTargetSize(file, args.getSize());
+        }
+	if(args.getGrep() != null){
+            flag &= checkGrep(file, args.getGrep());
         }
         return flag;
     }
@@ -84,6 +90,24 @@ public class Finder {
                     // ignore
             }
         }
+        return false;
+    }
+    
+    private boolean checkGrep(File file, String pattern){
+        if(file.isFile()){
+            try(BufferedReader in = new BufferedReader(new FileReader(file))){
+                String line;
+                while((line = in.readLine()) != null){
+                    if(line.indexOf(pattern) >= 0){
+                        return true;
+                    }
+                }
+            }
+	catch (IOException e) {
+		return false;
+	}
+	}
+
         return false;
     }
 }
