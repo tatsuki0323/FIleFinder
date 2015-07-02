@@ -102,7 +102,9 @@ public class Finder {
                     }
                 }
             }
-        }
+	catch (IOException e) {
+		throw new RuntimeException(e.toString());
+	}
         return false;
     }
 }
